@@ -1,25 +1,34 @@
 <template>
-  <v-container>
-    <v-layout align-center justify-center>
-        <v-btn flat icon>
-          <v-icon>keyboard_arrow_left</v-icon>
-        </v-btn>
-        <h2 class="title">Week: 16</h2>
-        <v-btn flat icon>
-          <v-icon>keyboard_arrow_right</v-icon>
-        </v-btn>
-    </v-layout>
-  </v-container>
+  <v-layout row justify-center>
+    <v-flex xs12 sm6>
+      <v-card>
+        <v-list two-line>
+          <v-subheader>Excercise name</v-subheader>
+          <v-divider></v-divider>
+            <SetComponent></SetComponent>
+          <v-layout justify-end>
+          <v-btn fab small color="primary">
+              <v-icon>add</v-icon>
+          </v-btn>
+          </v-layout>
+        </v-list>
+      </v-card>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
+import SetComponent from './SetComponent.vue'
+
 export default {
-    name: "ExcerciseCard"
-}
+  name: "ExcerciseCard",
+  components: {
+      SetComponent
+  }
+};
 </script>
 
 <style>
-
 </style>
 
 

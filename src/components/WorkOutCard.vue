@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout align-center justify-center>
-      <v-card height="130" width="200">
+      <v-card height="100%" width="100%">
         <v-card-tile primary-title>
           <div class="text-xs-center">
             <h2 headline mb-0>Workout name</h2>
