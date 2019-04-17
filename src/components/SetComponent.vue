@@ -8,11 +8,6 @@
       </v-list-tile-content>
     </v-list-tile>
     <v-divider></v-divider>
-    <v-layout justify-end>
-      <v-btn fab small color="primary">
-        <v-icon>add</v-icon>
-      </v-btn>
-    </v-layout>
   </v-container>
 </template>
 

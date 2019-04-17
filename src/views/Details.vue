@@ -13,6 +13,12 @@
       </v-layout>
     </v-container>
     <ExcerciseCard></ExcerciseCard>
+    <br>
+    <v-flex sm9>
+      <v-layout justify-end>
+        <v-btn color="primary">Add</v-btn>
+      </v-layout>
+    </v-flex>
   </v-content>
 </template>
 
