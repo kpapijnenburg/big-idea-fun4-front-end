@@ -14,8 +14,8 @@
 
 <script>
 export default {
-  name: "WeekNumber"
-};
+    name: "ExcerciseCard"
+}
 </script>
 
 <style>

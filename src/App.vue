@@ -1,26 +1,18 @@
 <template>
   <v-app>
     <Header></Header>
-    <v-content>
-      <WeekNumber></WeekNumber>
-    </v-content>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import WeekNumber from "./components/WeekNumber.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
-    WeekNumber
+    Header
   },
-  data() {
-    return {
-      //
-    };
-  }
+
 };
 </script>

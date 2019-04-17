@@ -1,0 +1,34 @@
+<template>
+  <v-container>
+    <v-layout align-center justify-center>
+      <v-card height="130" width="200">
+        <v-card-tile primary-title>
+          <div class="text-xs-center">
+            <h2 headline mb-0>Workout name</h2>
+            <p>Monday 15th of April</p>
+          </div>
+        </v-card-tile>
+
+        <v-card-actions justify-end>
+          <router-link to='/details'>
+            <v-btn class="router-btn" flat color="blue">Details</v-btn>
+          </router-link>
+        </v-card-actions>
+      </v-card>
+    </v-layout>
+  </v-container>
+</template>
+
+<script>
+export default {
+  name: "WorkOutCard"
+};
+</script>
+
+<style>
+    .router-btn {
+        text-decoration: none;
+    }
+</style>
+
+
