@@ -1,5 +1,5 @@
 <template>
-    <mdc-top-app-bar title="App" event="nav"></mdc-top-app-bar>
+<p>Test</p>
 </template>
 
 <script>
