@@ -1,7 +1,7 @@
 <template>
     <v-toolbar app>
       <v-toolbar-title class="headline text-uppercase">
-        <span>App</span>
+        <span>Fitness App</span>
         <span class="font-weight-light"></span>
       </v-toolbar-title>
     </v-toolbar>
