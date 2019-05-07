@@ -8,9 +8,6 @@
       <v-layout align-center justify-center>
         <p class="title">Monday 15th of April</p>
       </v-layout>
-      <v-layout align-center justify-center>
-        <router-link to="/">Return home</router-link>
-      </v-layout>
     </v-container>
     <ExcerciseCard></ExcerciseCard>
     <br>
