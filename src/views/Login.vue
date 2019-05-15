@@ -1,26 +1,32 @@
 <template>
   <v-content>
-    <div>
-      <v-form>
+    <v-layout flex align-center justify-center>
+      <v-card justify-center width="50%">
         <v-container>
-          <h1>Login</h1>
-          <br>
-          <v-text-field v-model="email" placeholder="Email" label="Email" solo></v-text-field>
-          <v-text-field
-            v-model="password"
-            placeholder="Password"
-            label="Password"
-            type="password"
-            solo
-          ></v-text-field>
-          <v-btn>Login</v-btn>
+          <v-form>
+            <h1>Login</h1>
+            <br>
+            <div>
+              <v-text-field v-model="email" placeholder="Email" label="Email" solo></v-text-field>
+            </div>
+            <v-text-field
+              v-model="password"
+              placeholder="Password"
+              label="Password"
+              type="password"
+              solo
+            ></v-text-field>
+            <v-btn color="info">Login</v-btn>
+          </v-form>
         </v-container>
-      </v-form>
-    </div>
+      </v-card>
+    </v-layout>
   </v-content>
 </template>
 
 <script>
+import { required } from "vuelidate/lib/validators";
+
 export default {
   name: "login",
   data() {
@@ -29,6 +35,11 @@ export default {
       password: "",
       user: Object
     };
+  },
+  validations: {
+    email: {
+      required
+    }
   },
   methods: {
     async login(e) {

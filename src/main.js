@@ -5,6 +5,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import router from './router'
 import UserServiceInstaller from './installers/UserServiceInstaller.js'
+import Vuelidate from 'vuelidate'
 
 //Use this for local hosted API
 //Vue.prototype.$api = "http://localhost:8080/"
@@ -16,12 +17,12 @@ Vue.use(UserServiceInstaller, {
   baseUrl: "http://localhost:8080/"
 })
 
-Vue.use(Vuetify)
-
-
 Vue.config.productionTip = false
 
 new Vue({
   router,
   render: h => h(App),
 }).$mount('#app')
+
+Vue.use(Vuetify)
+Vue.user(Vuelidate)
