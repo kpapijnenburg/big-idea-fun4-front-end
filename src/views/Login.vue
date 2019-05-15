@@ -20,6 +20,8 @@
             <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
             <v-btn v-on:click="login" block color="info">Login</v-btn>
           </v-form>
+          <br>
+          <router-link to="/register">No account yet? Click here to register.</router-link>
         </v-container>
       </v-card>
     </v-layout>
@@ -28,6 +30,7 @@
 
 <script>
 import { setTimeout } from "timers";
+
 export default {
   name: "login",
   data() {

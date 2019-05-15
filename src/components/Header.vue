@@ -1,7 +1,7 @@
 <template>
   <v-toolbar app>
     <v-toolbar-title class="headline text-uppercase">
-      <router-link to="/home">
+      <router-link class="header-link" to="/home">
         <span>Fitness App</span>
         <span class="font-weight-light"></span>
       </router-link>
@@ -19,11 +19,12 @@ export default {
 };
 </script>
 
-<style lang="stylus">
-a {
+<style lang="css" scoped>
+.header-link {
   text-decoration: none;
   color: black;
 }
 </style>
+
 
 
