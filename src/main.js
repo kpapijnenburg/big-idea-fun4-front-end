@@ -8,13 +8,13 @@ import UserServiceInstaller from './installers/UserServiceInstaller.js'
 import Vuelidate from 'vuelidate'
 
 //Use this for local hosted API
-//Vue.prototype.$api = "http://localhost:8080/"
+//Vue.prototype.$api = "http://localhost:9000/"
 
 // Use this for seclab hosted API
 //Vue.prototype.$api = "http:192.168.30.183:8082/fitnessapp/"
 
 Vue.use(UserServiceInstaller, {
-  baseUrl: "http://localhost:8080/"
+  baseUrl: "http://localhost:9000/"
 })
 
 Vue.config.productionTip = false

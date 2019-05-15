@@ -16,7 +16,9 @@
               type="password"
               solo
             ></v-text-field>
-            <v-btn color="info">Login</v-btn>
+            <v-alert dismissible v-model="failed" type="error">Incorrect credentials</v-alert>
+            <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
+            <v-btn v-on:click="login" block color="info">Login</v-btn>
           </v-form>
         </v-container>
       </v-card>
@@ -25,21 +27,17 @@
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
-
+import { setTimeout } from "timers";
 export default {
   name: "login",
   data() {
     return {
       email: "",
       password: "",
-      user: Object
+      user: Object,
+      failed: false,
+      succesful: false
     };
-  },
-  validations: {
-    email: {
-      required
-    }
   },
   methods: {
     async login(e) {
@@ -52,8 +50,17 @@ export default {
         password: this.password
       };
 
-      this.user = await this.$userService.getByCredentials(credentials);
-      console.log(this.user);
+      const result = await this.$userService.getByCredentials(credentials);
+
+      if (result.status == 500) {
+        this.failed = true;
+      } else {
+        this.succesful = true;
+
+        this.user = result;
+
+        setTimeout(() => this.$router.push("/home"), 1000);
+      }
     }
   },
   components: {}
@@ -63,26 +70,6 @@ export default {
 <style>
 </style>
 
-  <!-- <v-content>
-    <v-container>
-      <v-layout align-center justify-center>
-        <v-card height="100%" width="50%">
-          <v-card-tile primary-title>
-            <div class="text-xs-center">
-              <h2>Login</h2>
-              <div>
-                <form @submit="login">
-                  <input type="text" v-model="email" name="email" placeholder="Email adress">
-                  <input type="text" v-model="password" name="password" placeholder="Password">
-                  <input type="submit" value="submit" class="btn">
-                </form>
-              </div>
-            </div>
-          </v-card-tile>
-        </v-card>
-      </v-layout>
-    </v-container>
-  </v-content> -->
 
 
 
