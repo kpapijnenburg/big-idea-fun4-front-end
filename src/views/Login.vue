@@ -3,17 +3,20 @@
     <v-layout flex align-center justify-center>
       <v-card justify-center width="50%">
         <v-container>
-          <v-form @submit.prevent="login" >
+          <v-form>
             <h1>Login</h1>
             <br>
-            <v-text-field v-model="email" placeholder="Email" label="Email" solo></v-text-field>
+            <v-text-field v-model="credentials.email" placeholder="Email" label="Email" solo></v-text-field>
+            <div class="warning-text" v-if="!$v.credentials.email.required">Email is required</div>
+            <div class="warning-text" v-if="!$v.credentials.email.email">Not a valid email adress</div>
             <v-text-field
-              v-model="password"
+              v-model="credentials.password"
               placeholder="Password"
               label="Password"
               type="password"
               solo
             ></v-text-field>
+            <div class="warning-text" v-if="!$v.credentials.password.required">Password is required</div>
             <v-alert dismissible v-model="failed" type="error">Incorrect credentials</v-alert>
             <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
             <v-btn v-on:click="login" block color="info">Login</v-btn>
@@ -38,9 +41,8 @@ export default {
         email: "",
         password: ""
       },
-      user: Object,
       failed: false,
-      succesful: false,
+      succesful: false
     };
   },
   validations: {
@@ -59,20 +61,14 @@ export default {
       // prevent reloading of page
       e.preventDefault();
 
-      // Create credentials object to be send to server.
-      const credentials = {
-        email: this.credentials.email,
-        password: this.credentials.password
-      };
-
-      const result = await this.$userService.getByCredentials(credentials);
+      const result = await this.$userService.getByCredentials(this.credentials);
 
       if (result.status == 500) {
         this.failed = true;
       } else {
         this.succesful = true;
 
-        this.user = result;
+        document.cookie = "userId=" + result.id;
 
         setTimeout(() => this.$router.push("/home"), 1000);
       }
@@ -82,7 +78,10 @@ export default {
 };
 </script>
 
-<style>
+<style <style lang="scss" scoped>
+  .warning-text {
+    color: red;
+  }
 </style>
 
 

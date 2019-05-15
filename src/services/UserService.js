@@ -26,4 +26,8 @@ export class UserService {
       return response;
     });
   }
+
+  async getUserFromCookie(){
+
+  }
 }
