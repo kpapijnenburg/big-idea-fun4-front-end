@@ -3,12 +3,10 @@
     <v-layout flex align-center justify-center>
       <v-card justify-center width="50%">
         <v-container>
-          <v-form>
+          <v-form @submit.prevent="login" >
             <h1>Login</h1>
             <br>
-            <div>
-              <v-text-field v-model="email" placeholder="Email" label="Email" solo></v-text-field>
-            </div>
+            <v-text-field v-model="email" placeholder="Email" label="Email" solo></v-text-field>
             <v-text-field
               v-model="password"
               placeholder="Password"
@@ -30,17 +28,31 @@
 
 <script>
 import { setTimeout } from "timers";
+import { required, email } from "vuelidate/lib/validators";
 
 export default {
   name: "login",
   data() {
     return {
-      email: "",
-      password: "",
+      credentials: {
+        email: "",
+        password: ""
+      },
       user: Object,
       failed: false,
-      succesful: false
+      succesful: false,
     };
+  },
+  validations: {
+    credentials: {
+      email: {
+        required,
+        email
+      },
+      password: {
+        required
+      }
+    }
   },
   methods: {
     async login(e) {
@@ -49,8 +61,8 @@ export default {
 
       // Create credentials object to be send to server.
       const credentials = {
-        email: this.email,
-        password: this.password
+        email: this.credentials.email,
+        password: this.credentials.password
       };
 
       const result = await this.$userService.getByCredentials(credentials);
