@@ -6,20 +6,11 @@
           <v-form>
             <h1>Login</h1>
             <br>
-            <v-text-field v-model="credentials.email" placeholder="Email" label="Email" solo></v-text-field>
-            <div class="warning-text" v-if="!$v.credentials.email.required">Email is required</div>
-            <div class="warning-text" v-if="!$v.credentials.email.email">Not a valid email adress</div>
-            <v-text-field
-              v-model="credentials.password"
-              placeholder="Password"
-              label="Password"
-              type="password"
-              solo
-            ></v-text-field>
-            <div class="warning-text" v-if="!$v.credentials.password.required">Password is required</div>
+            <v-text-field :rules="[rules.required, rules.email]" v-model="credentials.email" label="Email"></v-text-field>
+            <v-text-field :rules="[rules.required]" v-model="credentials.password" label="Password" type="password"></v-text-field>
             <v-alert dismissible v-model="failed" type="error">Incorrect credentials</v-alert>
             <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
-            <v-btn v-on:click="login" block color="info">Login</v-btn>
+            <v-btn :loading="isloggingin" v-on:click="login" block color="info">Login</v-btn>
           </v-form>
           <br>
           <router-link to="/register">No account yet? Click here to register.</router-link>
@@ -31,7 +22,6 @@
 
 <script>
 import { setTimeout } from "timers";
-import { required, email } from "vuelidate/lib/validators";
 
 export default {
   name: "login",
@@ -42,23 +32,18 @@ export default {
         password: ""
       },
       failed: false,
-      succesful: false
-    };
-  },
-  validations: {
-    credentials: {
-      email: {
-        required,
-        email
-      },
-      password: {
-        required
+      succesful: false,
+      isloggingin: false,
+      rules: {
+        required: v => !!v || "This field is required.",
+        email: v => /.+@.+/.test(v) || "E-mail must be valid"
       }
-    }
+    };
   },
   methods: {
     async login(e) {
       // prevent reloading of page
+      this.isloggingin = true;
       e.preventDefault();
 
       const result = await this.$userService.getByCredentials(this.credentials);
@@ -72,6 +57,8 @@ export default {
 
         setTimeout(() => this.$router.push("/home"), 1000);
       }
+
+      this.isloggingin = false;
     }
   },
   components: {}
@@ -79,9 +66,9 @@ export default {
 </script>
 
 <style <style lang="scss" scoped>
-  .warning-text {
-    color: red;
-  }
+.warning-text {
+  color: red;
+}
 </style>
 
 

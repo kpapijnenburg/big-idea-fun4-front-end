@@ -4,30 +4,26 @@ export class UserService {
   }
 
   async getByCredentials(credentials) {
-    return await fetch(this.endpoint + "users/getByCredentials", {
+    const response = await fetch(this.endpoint + "users/getByCredentials", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(credentials)
-    }).then(function(response) {
-      return response.json();
     });
+
+    return await response.json();
   }
 
   async create(user) {
-    return await fetch(this.endpoint + "users/", {
+    const response = await fetch(`${this.endpoint}/users`, {
       method: "POST",
+      body: JSON.stringify(user),
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(user)
-    }).then(function(response) {
-      return response;
+      }
     });
-  }
 
-  async getUserFromCookie(){
-
+    return response.status == 201;
   }
 }

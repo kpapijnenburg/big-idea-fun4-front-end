@@ -46,9 +46,7 @@ export default {
           password: this.password
         };
 
-        const result = await this.$userService.create(user);
-
-        if (result.status == 201) {
+        if (await this.$userService.create(user)) {
           this.registered = true;
           setTimeout(() => this.$router.push("/"), 1500);
 
