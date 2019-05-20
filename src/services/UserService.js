@@ -16,7 +16,7 @@ export class UserService {
   }
 
   async create(user) {
-    const response = await fetch(`${this.endpoint}/users`, {
+    const response = await fetch(`${this.endpoint}users`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
@@ -28,7 +28,7 @@ export class UserService {
   }
 
   async getById(id) {
-    const user = await fetch(`${this.endpoint}/users/${id}`);
+    const user = await fetch(`${this.endpoint}users/${id}`);
     return await user.json();
   }
 }

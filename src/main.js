@@ -13,15 +13,13 @@ import WorkOutServiceInstaller from "./installers/WorkOutServiceInstaller.js";
 // Use this for seclab hosted API
 //Vue.prototype.$api = "http:192.168.30.183:8082/fitnessapp/"
 
-const baseUrl = "http://localhost:9000/";
-
 Vue.use(Vuetify);
 
 Vue.use(UserServiceInstaller, {
-  baseUrl: baseUrl
+  baseUrl: "http://localhost:9000/"
 });
 Vue.use(WorkOutServiceInstaller, {
-  baseUrl: baseUrl
+  baseUrl: "http://localhost:9000/"
 });
 
 Vue.config.productionTip = false;

@@ -8,7 +8,7 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn v-on:click="logout" v-if="userLoggedIn">Logout {{user.name}}</v-btn>
+      <v-btn v-on:click="logout" v-if="this.user != null">Logout</v-btn>
       <router-link v-else to="/" tag="button" class="strong">Login</router-link>
     </v-toolbar-items>
   </v-toolbar>
@@ -23,15 +23,15 @@ export default {
     };
   },
   async mounted() {
-    this.user = await this.$userService.getById(this.getUserId());
+    const id = this.getUserId();
+    if (id != null) {
+      this.user = await this.$userService.getById();
+    }
   },
   methods: {
-    userLoggedIn() {
-      return this.user != null;
-    },
     logout() {
       document.cookie = "userId==;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      this.$router.push("/")
+      this.$router.push("/");
     },
     getUserId() {
       let value = "; " + document.cookie;

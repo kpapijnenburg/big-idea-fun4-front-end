@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header></Header>
+    <Header username=""></Header>
     <router-view></router-view>
   </v-app>
 </template>
@@ -14,6 +14,5 @@ export default {
   components: {
     Header
   },
-
 };
 </script>

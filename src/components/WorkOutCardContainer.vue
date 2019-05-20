@@ -1,25 +1,7 @@
 <template>
   <v-container grid-list-sm justify-center>
     <v-layout row wrap>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
-        <WorkOutCard></WorkOutCard>
-      </v-flex>
-      <v-flex xs4>
+      <v-flex v-for="workout in workouts" v-bind:key="workout.id" xs4>
         <WorkOutCard></WorkOutCard>
       </v-flex>
     </v-layout>
@@ -36,11 +18,29 @@ export default {
   },
   data() {
     return {
-      workouts: []
+      workouts: null
     };
   },
-  mounted(){
+  async mounted() {
+    const userId = this.getUserId();
 
+    if (userId != null) {
+      this.workouts = await this.$workOutService.getByUserId(userId);
+      console.log(this.workouts);
+    }
+  },
+  methods: {
+    getUserId() {
+      let value = "; " + document.cookie;
+      let parts = value.split("; " + "userId" + "=");
+
+      if (parts.length == 2) {
+        return parts
+          .pop()
+          .split(";")
+          .shift();
+      }
+    }
   }
 };
 </script>
