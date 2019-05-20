@@ -9,10 +9,8 @@
           </div>
         </v-card-tile>
 
-        <v-card-actions justify-end>
-          <router-link to="/details">
-            <v-btn class="router-btn" flat color="blue">Details</v-btn>
-          </router-link>
+        <v-card-actions>
+          <v-btn v-on:click="details" color="primary" flat block>Details</v-btn>
         </v-card-actions>
       </v-card>
     </v-layout>
@@ -22,14 +20,16 @@
 <script>
 export default {
   name: "WorkOutCard",
-  props: ["name", "date"]
+  props: ["name", "date"],
+  methods: {
+    details() {
+      this.$router.push("/details");
+    }
+  }
 };
 </script>
 
 <style>
-.router-btn {
-  text-decoration: none;
-}
 </style>
 
 

@@ -1,18 +1,10 @@
 <template>
   <v-content>
+    <WorkOutCardContainer></WorkOutCardContainer>
     <br>
     <v-layout align-center justify-center>
-      <v-btn flat icon>
-        <v-icon>keyboard_arrow_left</v-icon>
-      </v-btn>
-      <h2 class="display-1">Week: 16</h2>
-      <v-btn flat icon>
-        <v-icon>keyboard_arrow_right</v-icon>
-      </v-btn>
+      <v-btn color="primary">Start new workout</v-btn>
     </v-layout>
-
-    <WorkOutCardContainer></WorkOutCardContainer>
-    
   </v-content>
 </template>
 
