@@ -35,7 +35,12 @@ export default {
     WorkOutCard
   },
   data() {
-    return [];
+    return {
+      workouts = []
+    };
+  },
+  mounted(){
+    
   }
 };
 </script>

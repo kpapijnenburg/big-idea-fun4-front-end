@@ -26,4 +26,9 @@ export class UserService {
 
     return response.status == 201;
   }
+
+  async getById(id) {
+    const user = await fetch(`${this.endpoint}/users/${id}`);
+    return await user.json();
+  }
 }
