@@ -1,8 +1,8 @@
 <template>
   <v-container grid-list-sm justify-center>
     <v-layout row wrap>
-      <v-flex v-for="workout in workouts" v-bind:key="workout.id" xs4>
-        <WorkOutCard></WorkOutCard>
+      <v-flex v-for="workout in workouts" v-bind:key="workout.id" xs3>
+        <WorkOutCard :name="workout.name" :date="workout.date"></WorkOutCard>
       </v-flex>
     </v-layout>
   </v-container>

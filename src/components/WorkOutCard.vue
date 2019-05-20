@@ -4,13 +4,13 @@
       <v-card height="100%" width="100%">
         <v-card-tile primary-title>
           <div class="text-xs-center">
-            <h2 headline mb-0>Workout name</h2>
-            <p>Monday 15th of April</p>
+            <h2 headline mb-0>{{name}}</h2>
+            <p>{{date | formatDate}}</p>
           </div>
         </v-card-tile>
 
         <v-card-actions justify-end>
-          <router-link to='/details'>
+          <router-link to="/details">
             <v-btn class="router-btn" flat color="blue">Details</v-btn>
           </router-link>
         </v-card-actions>
@@ -21,14 +21,15 @@
 
 <script>
 export default {
-  name: "WorkOutCard"
+  name: "WorkOutCard",
+  props: ["name", "date"]
 };
 </script>
 
 <style>
-    .router-btn {
-        text-decoration: none;
-    }
+.router-btn {
+  text-decoration: none;
+}
 </style>
 
 
