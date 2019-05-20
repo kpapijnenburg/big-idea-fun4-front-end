@@ -36,11 +36,11 @@ export default {
   },
   data() {
     return {
-      workouts = []
+      workouts: []
     };
   },
   mounted(){
-    
+
   }
 };
 </script>
