@@ -8,7 +8,6 @@
             <p>{{workout.date | formatDate}}</p>
           </div>
         </v-card-title>
-
         <v-card-actions>
           <v-btn v-on:click="details(workout.id)" color="primary" flat block>Details</v-btn>
         </v-card-actions>

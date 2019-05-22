@@ -1,24 +1,109 @@
 <template>
   <v-container>
-    <v-list-tile>
-      <v-list-tile-content>
-        <v-list-tile-title>Set: 1</v-list-tile-title>
-        <v-list-tile-sub-title>Weight: {{setInfo.weight}}</v-list-tile-sub-title>
-        <v-list-tile-sub-title>Reps: {{setInfo.reps}}</v-list-tile-sub-title>
-      </v-list-tile-content>
-    </v-list-tile>
-    <v-divider></v-divider>
+    <v-layout justify-center>
+      <table>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr>
+          <td>
+            <v-btn v-on:click="subtractWeight" flat icon>
+              <v-icon>remove</v-icon>
+            </v-btn>
+          </td>
+          <td>
+            <strong>Weight:</strong>
+          </td>
+          <td>
+            <strong>{{this.weight}}</strong>
+          </td>
+          <td>
+            <v-btn v-on:click="addWeight" flat icon>
+              <v-icon>add</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <v-btn v-on:click="subtractRep" flat icon>
+              <v-icon>remove</v-icon>
+            </v-btn>
+          </td>
+          <td>
+            <strong>Reps:</strong>
+          </td>
+          <td>
+            <strong>{{this.reps}}</strong>
+          </td>
+          <td>
+            <v-btn v-on:click="addRep" flat icon>
+              <v-icon>add</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <v-btn v-on:click="saveSet" flat icon color="green">
+              <v-icon>save</v-icon>
+            </v-btn>
+          </td>
+          <td></td>
+          <td></td>
+          <td>
+            <v-btn v-on:click="deleteSet" flat icon color="red">
+              <v-icon>delete</v-icon>
+            </v-btn>
+          </td>
+        </tr>
+      </table>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 export default {
   name: "SetComponent",
-  props: ['setNumber','setInfo']
+  props: ["setNumber", "setInfo"],
+  methods: {
+    subtractWeight() {
+      if (this.weight > 0) {
+        this.weight--;
+      }
+    },
+    addWeight() {
+      this.weight++;
+    },
+    subtractRep() {
+      if (this.reps > 0) {
+        this.reps--;
+      }
+    },
+    addRep() {
+      this.reps++;
+    },
+    saveSet() {},
+    deleteSet() {}
+  },
+  data() {
+    return {
+      id: -1,
+      weight: -1,
+      reps: -1
+    };
+  },
+  mounted() {
+    this.id = this.setInfo.id;
+    this.reps = this.setInfo.reps;
+    this.weight = this.setInfo.weight;
+  }
 };
 </script>
 
 <style>
+
 </style>
 
 
