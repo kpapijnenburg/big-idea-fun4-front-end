@@ -3,14 +3,16 @@ export class SetService {
     this.endpoint = endpoint;
   }
 
-  async updateSet(set) {
-    const response = await fetch(`${this.endpoint}sets`, {
+  async update(set, id) {
+    const response = await fetch(`${this.endpoint}sets/${id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Acces-Control-Allow-Origin": "*"
       },
       body: JSON.stringify(set)
     });
-    console.log(response);
+
+    return response.status == 202;
   }
 }

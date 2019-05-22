@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <v-alert dismissible v-model="failed" type="error">Update failed</v-alert>
+    <v-alert dismissible v-model="succesful" type="success">Update succeeded</v-alert>
     <v-layout justify-center>
       <table>
         <tr>
@@ -18,7 +20,7 @@
             <strong>Weight:</strong>
           </td>
           <td>
-            <strong>{{this.weight}}</strong>
+            <strong>{{this.set.weight}}</strong>
           </td>
           <td>
             <v-btn v-on:click="addWeight" flat icon>
@@ -36,7 +38,7 @@
             <strong>Reps:</strong>
           </td>
           <td>
-            <strong>{{this.reps}}</strong>
+            <strong>{{this.set.reps}}</strong>
           </td>
           <td>
             <v-btn v-on:click="addRep" flat icon>
@@ -69,41 +71,52 @@ export default {
   props: ["setNumber", "setInfo"],
   methods: {
     subtractWeight() {
-      if (this.weight > 0) {
-        this.weight--;
+      if (this.set.weight > 0) {
+        this.set.weight--;
       }
     },
     addWeight() {
-      this.weight++;
+      this.set.weight++;
     },
     subtractRep() {
-      if (this.reps > 0) {
-        this.reps--;
+      if (this.set.reps > 0) {
+        this.set.reps--;
       }
     },
     addRep() {
-      this.reps++;
+      this.set.reps++;
     },
-    saveSet() {},
+    saveSet() {
+      if (this.$setService.update(this.set, this.set.id)) {
+        this.succesful = true;
+      } else {
+        this.failed = true;
+      }
+    },
     deleteSet() {}
   },
   data() {
     return {
-      id: -1,
-      weight: -1,
-      reps: -1
+      set: {
+        id: -1,
+        weight: -1,
+        reps: -1,
+        exercise: Object
+      },
+      succesful: false,
+      failed: false
     };
   },
   mounted() {
-    this.id = this.setInfo.id;
-    this.reps = this.setInfo.reps;
-    this.weight = this.setInfo.weight;
+    this.set.id = this.setInfo.id;
+    this.set.reps = this.setInfo.reps;
+    this.set.weight = this.setInfo.weight;
+    this.set.exercise = this.setInfo.exercise;
   }
 };
 </script>
 
 <style>
-
 </style>
 
 
