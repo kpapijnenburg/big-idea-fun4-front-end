@@ -2,7 +2,7 @@
   <v-container grid-list-sm justify-center>
     <v-layout row wrap>
       <v-flex v-for="workout in workouts" v-bind:key="workout.id" xs3>
-        <WorkOutCard :name="workout.name" :date="workout.date"></WorkOutCard>
+        <WorkOutCard :workout="workout"></WorkOutCard>
       </v-flex>
     </v-layout>
   </v-container>

@@ -3,9 +3,9 @@
     <v-flex xs12 sm6>
       <v-card>
         <v-list two-line>
-          <v-subheader>Excercise name</v-subheader>
+          <v-subheader>{{this.set.exercise.name}}</v-subheader>
           <v-divider></v-divider>
-            <SetComponent></SetComponent>
+            <SetComponent :setInfo="set"></SetComponent>
           <v-layout justify-end>
           <v-btn fab small color="primary">
               <v-icon>add</v-icon>
@@ -24,7 +24,8 @@ export default {
   name: "ExcerciseCard",
   components: {
       SetComponent
-  }
+  },
+  props: ['set']
 };
 </script>
 
