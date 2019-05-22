@@ -7,22 +7,24 @@ import "vuetify/dist/vuetify.min.css";
 import router from "./router";
 import UserServiceInstaller from "./installers/UserServiceInstaller.js";
 import WorkOutServiceInstaller from "./installers/WorkOutServiceInstaller.js";
+import SetServiceInstaller from "./installers/SetServiceInstaller.js";
 
-//Use this for local hosted API
-//Vue.prototype.$api = "http://localhost:9000/"
-
-// Use this for seclab hosted API
-//Vue.prototype.$api = "http:192.168.30.183:8082/fitnessapp/"
-
+// Vue use icons
 Vue.use(Vuetify, {
   iconfont: "fa"
 });
 
+// Vue use service installers
+const baseUrl = "http://localhost:9000/";
+
 Vue.use(UserServiceInstaller, {
-  baseUrl: "http://localhost:9000/"
+  baseUrl: baseUrl
 });
 Vue.use(WorkOutServiceInstaller, {
-  baseUrl: "http://localhost:9000/"
+  baseUrl: baseUrl
+});
+Vue.use(SetServiceInstaller, {
+  baseUrl: baseUrl
 });
 
 // Filtering dates with the moment package
