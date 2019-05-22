@@ -8,7 +8,7 @@
           <SetComponent :setInfo="set"></SetComponent>
           <v-divider></v-divider>
           <v-layout justify-end>
-            <v-btn fab small color="primary">
+            <v-btn v-on:click="add" fab small color="primary">
               <v-icon>add</v-icon>
             </v-btn>
           </v-layout>
@@ -26,7 +26,18 @@ export default {
   components: {
     SetComponent
   },
-  props: ["set"]
+  props: ["set", "workoutId"],
+  methods: {
+    add() {
+      const newSet = {
+        exercise: this.set.exercise,
+        weight: 0,
+        reps: 0
+      };
+
+      this.$emit('emit-add', newSet)
+    }
+  }
 };
 </script>
 

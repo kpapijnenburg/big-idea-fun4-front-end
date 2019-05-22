@@ -9,7 +9,13 @@
         <p class="title">{{this.workout.date | formatDate}}</p>
       </v-layout>
     </v-container>
-    <ExcerciseCard v-for="set in workout.sets" v-bind:key="set.id" :set="set"></ExcerciseCard>
+    <ExcerciseCard
+      v-for="set in workout.sets"
+      v-bind:workoutId="workout.id"
+      v-bind:key="set.id"
+      :set="set"
+      v-on:emit-add="addSet"
+    ></ExcerciseCard>
     <br>
     <v-flex sm9>
       <v-layout justify-end>
@@ -21,6 +27,7 @@
 
 <script>
 import ExcerciseCard from "../components/ExcerciseCard.vue";
+import { constants } from "crypto";
 
 export default {
   name: "Details",
@@ -35,7 +42,12 @@ export default {
     if (this.id > 0) {
       this.workout = await this.$workOutService.getById(this.id);
     }
-    console.log(this.workout);
+  },
+  methods: {
+    async addSet(newSet) {
+      this.workout.sets.push(newSet);
+      this.workout = await this.$workOutService.update(this.workout, this.id);
+    }
   }
 };
 </script>
