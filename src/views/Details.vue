@@ -12,14 +12,16 @@
         <v-btn v-on:click="addExercise" color="primary">Add Exercise</v-btn>
       </v-layout>
     </v-container>
-    <ExcerciseCard
-      v-for="set in workout.sets"
-      v-bind:workoutId="workout.id"
-      v-bind:key="set.id"
-      :set="set"
-      v-on:emit-add="addSet"
-      v-on:delete-set="deleteSet"
-    ></ExcerciseCard>
+    <v-expansion-panel>
+      <ExcerciseCard
+        v-for="set in workout.sets"
+        v-bind:workoutId="workout.id"
+        v-bind:key="set.id"
+        :set="set"
+        v-on:emit-add="addSet"
+        v-on:delete-set="deleteSet"
+      ></ExcerciseCard>
+    </v-expansion-panel>
     <br>
     <v-flex sm9>
       <v-layout justify-end></v-layout>
@@ -43,12 +45,13 @@ export default {
   async mounted() {
     if (this.id > 0) {
       this.workout = await this.$workOutService.getById(this.id);
+      console.log(this.workout);
     }
   },
   methods: {
     async addSet(newSet) {
       this.workout.sets.push(newSet);
-      this.workout = await this.$workOutService.update(this.workout, this.id);
+      this.$workOutService.update(this.workout, this.id);
     },
     async deleteSet(set) {
       if (confirm("Are you sure you want to delete this set?")) {

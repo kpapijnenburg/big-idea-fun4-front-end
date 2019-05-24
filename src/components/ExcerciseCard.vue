@@ -1,5 +1,5 @@
 <template>
-  <v-layout row justify-center>
+  <!-- <v-layout row justify-center>
     <v-flex xs12 sm3>
       <v-card>
         <v-list two-line>
@@ -18,7 +18,24 @@
         </v-list>
       </v-card>
     </v-flex>
-  </v-layout>
+  </v-layout>-->
+  <v-expansion-panel-content>
+    <template v-slot:header>
+      <div>{{set.exercise.name}}</div>
+    </template>
+    <v-card>
+      <SetComponent :setInfo="set"></SetComponent>
+      <v-divider></v-divider>
+      <v-layout justify-end>
+        <v-btn v-on:click="add" fab small color="primary">
+          <v-icon>add</v-icon>
+        </v-btn>
+        <v-btn v-on:click="deleteSet" fab small color="red">
+          <v-icon>delete</v-icon>
+        </v-btn>
+      </v-layout>
+    </v-card>
+  </v-expansion-panel-content>
 </template>
 
 <script>
