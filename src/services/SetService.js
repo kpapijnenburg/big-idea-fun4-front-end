@@ -15,4 +15,11 @@ export class SetService {
 
     return response.status == 202;
   }
+
+  async delete(id) {
+    const response = await fetch(`${this.endpoint}sets/${id}`, {
+      method: "DELETE"
+    });
+    return response == 202;
+  }
 }

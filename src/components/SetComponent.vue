@@ -9,6 +9,7 @@
           <th></th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
         <tr>
           <td>
@@ -27,6 +28,11 @@
               <v-icon>add</v-icon>
             </v-btn>
           </td>
+          <td>
+            <v-btn v-on:click="saveSet" flat icon color="green">
+              <v-icon>save</v-icon>
+            </v-btn>
+          </td>
         </tr>
         <tr>
           <td>
@@ -43,20 +49,6 @@
           <td>
             <v-btn v-on:click="addRep" flat icon>
               <v-icon>add</v-icon>
-            </v-btn>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <v-btn v-on:click="saveSet" flat icon color="green">
-              <v-icon>save</v-icon>
-            </v-btn>
-          </td>
-          <td></td>
-          <td></td>
-          <td>
-            <v-btn v-on:click="deleteSet" flat icon color="red">
-              <v-icon>delete</v-icon>
             </v-btn>
           </td>
         </tr>
@@ -92,8 +84,7 @@ export default {
       } else {
         this.failed = true;
       }
-    },
-    deleteSet() {}
+    }
   },
   data() {
     return {

@@ -11,6 +11,9 @@
             <v-btn v-on:click="add" fab small color="primary">
               <v-icon>add</v-icon>
             </v-btn>
+            <v-btn v-on:click="deleteSet" fab small color="red">
+              <v-icon>delete</v-icon>
+            </v-btn>
           </v-layout>
         </v-list>
       </v-card>
@@ -35,7 +38,10 @@ export default {
         reps: 0
       };
 
-      this.$emit('emit-add', newSet)
+      this.$emit("emit-add", newSet);
+    },
+    deleteSet() {
+      this.$emit("delete-set", this.set);
     }
   }
 };

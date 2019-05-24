@@ -26,7 +26,6 @@ export default {
 
     if (userId != null) {
       this.workouts = await this.$workOutService.getByUserId(userId);
-      console.log(this.workouts);
     }
   },
   methods: {
