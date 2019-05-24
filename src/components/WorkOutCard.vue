@@ -3,7 +3,7 @@
     <v-layout align-center justify-center>
       <v-card height="100%" width="100%">
         <v-card-title primary-title>
-          <div class="text-xs-center">
+          <div>
             <h2 headline mb-0>{{workout.name}}</h2>
             <p>{{workout.date | formatDate}}</p>
           </div>

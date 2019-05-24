@@ -16,31 +16,7 @@ export default {
   components: {
     WorkOutCard
   },
-  data() {
-    return {
-      workouts: null
-    };
-  },
-  async mounted() {
-    const userId = this.getUserId();
-
-    if (userId != null) {
-      this.workouts = await this.$workOutService.getByUserId(userId);
-    }
-  },
-  methods: {
-    getUserId() {
-      let value = "; " + document.cookie;
-      let parts = value.split("; " + "userId" + "=");
-
-      if (parts.length == 2) {
-        return parts
-          .pop()
-          .split(";")
-          .shift();
-      }
-    }
-  }
+  props: ["workouts"]
 };
 </script>
 

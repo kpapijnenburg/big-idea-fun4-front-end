@@ -25,4 +25,16 @@ export class WorkOutService {
 
     return response.status == 202;
   }
+
+  async create(workout) {
+    const response = await fetch(`${this.endpoint}workouts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(workout)
+    });
+
+    return response.status == 201;
+  }
 }
