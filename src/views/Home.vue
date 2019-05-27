@@ -80,9 +80,6 @@ export default {
         };
         if (this.$workOutService.create(workout)) {
           this.workouts.push(workout);
-          alert("Succes");
-        } else {
-          alert("Fail");
         }
       }
     }

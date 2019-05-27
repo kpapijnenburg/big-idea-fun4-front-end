@@ -9,7 +9,29 @@
         <p class="title">{{this.workout.date | formatDate}}</p>
       </v-layout>
       <v-layout align-center justify-center>
-        <v-btn v-on:click="addExercise" color="primary">Add Exercise</v-btn>
+        <v-dialog v-model="dialog" persistent max-width="600px">
+          <template v-slot:activator="{ on }">
+            <v-btn color="primary" dark v-on="on">Add exercise</v-btn>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">New exercise</span>
+            </v-card-title>
+            <v-card-text>
+              <!-- <v-text-field
+                :rules="[rules.required]"
+                v-model="workoutName"
+                label="Workout name"
+                required
+              ></v-text-field>-->
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
+              <v-btn color="blue darken-1" flat @click="addExercise">Save</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </v-layout>
     </v-container>
     <v-expansion-panel>
@@ -39,13 +61,18 @@ export default {
   props: ["id"],
   data() {
     return {
-      workout: Object
+      rules: {
+        required: v => !!v || "Please enter a name for your workout."
+      },
+      workout: Object,
+      categories: [],
+      exercises: [],
+      dialog: false
     };
   },
   async mounted() {
     if (this.id > 0) {
       this.workout = await this.$workOutService.getById(this.id);
-      console.log(this.workout);
     }
   },
   methods: {
@@ -63,7 +90,9 @@ export default {
         }
       }
     },
-    addExercise() {}
+    addExercise() {
+      alert("Werkt");
+    }
   }
 };
 </script>
