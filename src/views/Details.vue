@@ -18,12 +18,15 @@
               <span class="headline">New exercise</span>
             </v-card-title>
             <v-card-text>
-              <!-- <v-text-field
-                :rules="[rules.required]"
-                v-model="workoutName"
-                label="Workout name"
-                required
-              ></v-text-field>-->
+              <v-combobox
+                :items="categories"
+                v-model="selectedCategory"
+                item-text="name"
+                label="Select a category"
+              ></v-combobox>
+              <v-combobox v-if="selectedCategory !== null">
+                
+              </v-combobox>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -66,6 +69,7 @@ export default {
       },
       workout: Object,
       categories: [],
+      selectedCategory: null,
       exercises: [],
       dialog: false
     };
@@ -73,6 +77,7 @@ export default {
   async mounted() {
     if (this.id > 0) {
       this.workout = await this.$workOutService.getById(this.id);
+      this.categories = await this.$categoryService.getAll();
     }
   },
   methods: {
@@ -90,9 +95,7 @@ export default {
         }
       }
     },
-    addExercise() {
-      alert("Werkt");
-    }
+    addExercise() {}
   }
 };
 </script>

@@ -8,6 +8,7 @@ import router from "./router";
 import UserServiceInstaller from "./installers/UserServiceInstaller.js";
 import WorkOutServiceInstaller from "./installers/WorkOutServiceInstaller.js";
 import SetServiceInstaller from "./installers/SetServiceInstaller.js";
+import CategoryServiceInstaller from './installers/CategoryServiceInstaller'
 
 // Vue use icons
 Vue.use(Vuetify, {
@@ -26,7 +27,9 @@ Vue.use(WorkOutServiceInstaller, {
 Vue.use(SetServiceInstaller, {
   baseUrl: baseUrl
 });
-
+Vue.use(CategoryServiceInstaller, {
+  baseUrl: baseUrl
+})
 // Filtering dates with the moment package
 Vue.filter("formatDate", function(value) {
   if (value) {
