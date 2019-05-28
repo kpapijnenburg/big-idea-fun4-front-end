@@ -32,6 +32,10 @@ export class UserService {
   }
 
   async getById(id) {
+    if (!id) {
+      return undefined;
+    }
+
     const user = await fetch(`${this.endpoint}users/${id}`);
     return await user.json();
   }

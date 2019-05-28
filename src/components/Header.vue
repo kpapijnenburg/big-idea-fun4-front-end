@@ -25,7 +25,7 @@ export default {
   async mounted() {
     const id = this.getUserId();
     if (id > 0) {
-      this.user = await this.$userService.getById();
+      this.user = await this.$userService.getById(id);
     } else {
       this.user = null;
     }
