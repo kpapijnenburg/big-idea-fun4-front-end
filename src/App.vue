@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header username=""></Header>
+    <Header></Header>
     <router-view></router-view>
   </v-app>
 </template>
