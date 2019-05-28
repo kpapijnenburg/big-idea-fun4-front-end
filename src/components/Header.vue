@@ -9,7 +9,7 @@
     <v-spacer></v-spacer>
     <v-toolbar-items>
       <v-btn v-on:click="logout" v-if="this.user != null">Logout</v-btn>
-      <router-link v-else to="/" tag="button" class="strong">Login</router-link>
+      <router-link v-if="this.user == null" to="/" tag="button" class="strong">Login</router-link>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -24,8 +24,10 @@ export default {
   },
   async mounted() {
     const id = this.getUserId();
-    if (id != null) {
+    if (id > 0) {
       this.user = await this.$userService.getById();
+    } else {
+      this.user = null;
     }
   },
   methods: {
@@ -42,8 +44,10 @@ export default {
           .pop()
           .split(";")
           .shift();
+      } else {
+        return null;
       }
-    }
+    },
   }
 };
 </script>
