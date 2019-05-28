@@ -20,7 +20,7 @@
             ></v-text-field>
             <v-alert dismissible v-model="failed" type="error">Incorrect credentials</v-alert>
             <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
-            <v-btn :loading="isloggingin" v-on:click="login" block color="info">Login</v-btn>
+            <v-btn :loading="isloggingin" v-on:click.prevent="login" block color="info">Login</v-btn>
           </v-form>
           <br>
           <router-link to="/register">No account yet? Click here to register.</router-link>
@@ -52,9 +52,7 @@ export default {
   },
   methods: {
     async login(e) {
-      // prevent reloading of page
       this.isloggingin = true;
-      e.preventDefault();
 
       const result = await this.$userService.getByCredentials(this.credentials);
 
@@ -63,14 +61,13 @@ export default {
       } else {
         this.succesful = true;
 
-        document.cookie = "userId=" + result.id;
-
-        setTimeout(() => this.$router.push("/home"), 1000);
+        this.$store.commit("setUserId", result.id);
+        this.$router.push("/home");
       }
 
       this.isloggingin = false;
     }
-  },
+  }
 };
 </script>
 

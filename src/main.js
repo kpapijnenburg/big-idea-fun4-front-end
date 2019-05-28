@@ -10,6 +10,7 @@ import WorkOutServiceInstaller from "./installers/WorkOutServiceInstaller.js";
 import SetServiceInstaller from "./installers/SetServiceInstaller.js";
 import CategoryServiceInstaller from "./installers/CategoryServiceInstaller";
 import ExerciseServiceInstaller from "./installers/ExerciseServiceInstaller";
+import store from './store'
 
 // Vue use icons
 Vue.use(Vuetify, {
@@ -46,5 +47,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

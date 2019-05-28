@@ -8,8 +8,8 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn v-on:click="logout" v-if="this.user != null">Logout</v-btn>
-      <router-link v-if="this.user == null" to="/" tag="button" class="strong">Login</router-link>
+      <v-btn v-on:click="logout" v-if="$store.state.userId">Logout</v-btn>
+      <v-btn to="/" v-if="!$store.state.userId">Login</v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -17,36 +17,10 @@
 <script>
 export default {
   name: "Header",
-  data() {
-    return {
-      user: null
-    };
-  },
-  async mounted() {
-    const id = this.getUserId();
-    if (id > 0) {
-      this.user = await this.$userService.getById(id);
-    } else {
-      this.user = null;
-    }
-  },
   methods: {
     logout() {
-      document.cookie = "userId==;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      this.$store.commit("logout");
       this.$router.push("/");
-    },
-    getUserId() {
-      let value = "; " + document.cookie;
-      let parts = value.split("; " + "userId" + "=");
-
-      if (parts.length == 2) {
-        return parts
-          .pop()
-          .split(";")
-          .shift();
-      } else {
-        return null;
-      }
     },
   }
 };
