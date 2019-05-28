@@ -18,15 +18,22 @@
               <span class="headline">New exercise</span>
             </v-card-title>
             <v-card-text>
-              <v-combobox
+              <v-select
                 :items="categories"
                 v-model="selectedCategory"
                 item-text="name"
                 label="Select a category"
-              ></v-combobox>
-              <v-combobox v-if="selectedCategory !== null">
-                
-              </v-combobox>
+                v-on:change="filterExercises"
+                return-object
+              ></v-select>
+              <v-select
+                v-if="this.selectedCategory !== null"
+                :items="exercises"
+                v-model="selectedExercise"
+                item-text="name"
+                label="Select an exercise"
+                return-object
+              ></v-select>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -37,26 +44,31 @@
         </v-dialog>
       </v-layout>
     </v-container>
-    <v-expansion-panel>
-      <ExcerciseCard
-        v-for="set in workout.sets"
-        v-bind:workoutId="workout.id"
-        v-bind:key="set.id"
-        :set="set"
-        v-on:emit-add="addSet"
-        v-on:delete-set="deleteSet"
-      ></ExcerciseCard>
-    </v-expansion-panel>
-    <br>
-    <v-flex sm9>
-      <v-layout justify-end></v-layout>
-    </v-flex>
+    <v-container>
+      <v-layout justify-center align-center>
+        <v-flex xs6>
+          <v-expansion-panel
+            class="expansion-panel"
+            v-for="(set, index) in workout.sets"
+            v-bind:key="set.id"
+          >
+            <ExcerciseCard
+              v-bind:workoutId="workout.id"
+              :set="set"
+              :index="index"
+              v-on:emit-add="addSet"
+              v-on:delete-set="deleteSet"
+            ></ExcerciseCard>
+            <br>
+          </v-expansion-panel>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-content>
 </template>
 
 <script>
 import ExcerciseCard from "../components/ExcerciseCard.vue";
-import { constants } from "crypto";
 
 export default {
   name: "Details",
@@ -71,6 +83,7 @@ export default {
       categories: [],
       selectedCategory: null,
       exercises: [],
+      selectedExercise: null,
       dialog: false
     };
   },
@@ -95,12 +108,24 @@ export default {
         }
       }
     },
-    addExercise() {}
+    addExercise() {
+      this.workout.sets.push({
+        exercise: this.selectedExercise
+      });
+      this.$workOutService.update(this.workout, this.workout.id);
+      this.dialog = false;
+    },
+    filterExercises() {
+      this.exercises = this.selectedCategory.exercises;
+    }
   }
 };
 </script>
 
 <style>
+.expansion-panel {
+  padding: 10px;
+}
 </style>
 
 

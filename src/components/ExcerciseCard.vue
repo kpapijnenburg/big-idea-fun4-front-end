@@ -1,41 +1,23 @@
 <template>
-  <!-- <v-layout row justify-center>
-    <v-flex xs12 sm3>
+  <v-layout>
+    <v-expansion-panel-content>
+      <template v-slot:header>
+        <div>#{{computedIndex}} - {{set.exercise.name}}</div>
+      </template>
       <v-card>
-        <v-list two-line>
-          <v-subheader>{{this.set.exercise.name}}</v-subheader>
-          <v-divider></v-divider>
-          <SetComponent :setInfo="set"></SetComponent>
-          <v-divider></v-divider>
-          <v-layout justify-end>
-            <v-btn v-on:click="add" fab small color="primary">
-              <v-icon>add</v-icon>
-            </v-btn>
-            <v-btn v-on:click="deleteSet" fab small color="red">
-              <v-icon>delete</v-icon>
-            </v-btn>
-          </v-layout>
-        </v-list>
+        <SetComponent :setInfo="set"></SetComponent>
+        <v-divider></v-divider>
+        <v-layout justify-end>
+          <v-btn v-on:click="add" fab small color="primary">
+            <v-icon>add</v-icon>
+          </v-btn>
+          <v-btn v-on:click="deleteSet" fab small color="red">
+            <v-icon>delete</v-icon>
+          </v-btn>
+        </v-layout>
       </v-card>
-    </v-flex>
-  </v-layout>-->
-  <v-expansion-panel-content>
-    <template v-slot:header>
-      <div>{{set.exercise.name}}</div>
-    </template>
-    <v-card>
-      <SetComponent :setInfo="set"></SetComponent>
-      <v-divider></v-divider>
-      <v-layout justify-end>
-        <v-btn v-on:click="add" fab small color="primary">
-          <v-icon>add</v-icon>
-        </v-btn>
-        <v-btn v-on:click="deleteSet" fab small color="red">
-          <v-icon>delete</v-icon>
-        </v-btn>
-      </v-layout>
-    </v-card>
-  </v-expansion-panel-content>
+    </v-expansion-panel-content>
+  </v-layout>
 </template>
 
 <script>
@@ -46,7 +28,12 @@ export default {
   components: {
     SetComponent
   },
-  props: ["set", "workoutId"],
+  props: ["set", "workoutId", "index"],
+  computed: {
+    computedIndex: function() {
+      return this.index + 1;
+    }
+  },
   methods: {
     add() {
       const newSet = {
