@@ -6,8 +6,17 @@
           <v-form>
             <h1>Login</h1>
             <br>
-            <v-text-field :rules="[rules.required, rules.email]" v-model="credentials.email" label="Email"></v-text-field>
-            <v-text-field :rules="[rules.required]" v-model="credentials.password" label="Password" type="password"></v-text-field>
+            <v-text-field
+              :rules="[rules.required, rules.email]"
+              v-model="credentials.email"
+              label="Email"
+            ></v-text-field>
+            <v-text-field
+              :rules="[rules.required]"
+              v-model="credentials.password"
+              label="Password"
+              type="password"
+            ></v-text-field>
             <v-alert dismissible v-model="failed" type="error">Incorrect credentials</v-alert>
             <v-alert dismissible v-model="succesful" type="success">Login succesful</v-alert>
             <v-btn :loading="isloggingin" v-on:click="login" block color="info">Login</v-btn>
@@ -48,7 +57,7 @@ export default {
 
       const result = await this.$userService.getByCredentials(this.credentials);
 
-      if (result.status == 500) {
+      if (result.id == undefined) {
         this.failed = true;
       } else {
         this.succesful = true;
@@ -61,7 +70,6 @@ export default {
       this.isloggingin = false;
     }
   },
-  components: {}
 };
 </script>
 

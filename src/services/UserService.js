@@ -12,7 +12,11 @@ export class UserService {
       body: JSON.stringify(credentials)
     });
 
-    return await response.json();
+    if (response.status != 200) {
+      return false;
+    } else {
+      return await response.json();
+    }
   }
 
   async create(user) {
