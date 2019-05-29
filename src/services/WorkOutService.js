@@ -9,7 +9,7 @@ export class WorkOutService {
   }
 
   async getById(id) {
-    const workout = await fetch(`${this.endpoint}/workouts/${id}`);
+    const workout = await fetch(`${this.endpoint}workouts/${id}`);
     return await workout.json();
   }
 

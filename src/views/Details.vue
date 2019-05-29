@@ -108,11 +108,14 @@ export default {
         }
       }
     },
-    addExercise() {
+    async addExercise() {
       this.workout.sets.push({
-        exercise: {weight: 0, reps: 0, ...this.selectedExercise}
+        exercise: { weight: 0, reps: 0, ...this.selectedExercise }
       });
-      this.$workOutService.update(this.workout, this.workout.id);
+
+      await this.$workOutService.update(this.workout, this.workout.id);
+      
+      this.workout = await this.$workOutService.getById(this.workout.id);
       this.dialog = false;
     },
     filterExercises() {

@@ -50,14 +50,14 @@ export default {
     };
   },
   async mounted() {
-    this.userId = this.$store.state.userId
+    this.userId = this.$store.state.userId;
 
     if (this.userId != null) {
       this.workouts = await this.$workOutService.getByUserId(this.userId);
     }
   },
   methods: {
-    addWorkout() {
+    async addWorkout() {
       this.dialog = false;
 
       if (this.userId > 0) {
@@ -67,8 +67,11 @@ export default {
           date: Date.now(),
           sets: []
         };
-        if (this.$workOutService.create(workout)) {
-          this.workouts.push(workout);
+
+        if (await this.$workOutService.create(workout)) {
+          if (this.userId != null) {
+            this.workouts = await this.$workOutService.getByUserId(this.userId);
+          }
         }
       }
     }
