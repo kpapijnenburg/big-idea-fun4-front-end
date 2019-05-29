@@ -18,10 +18,10 @@ Vue.use(Vuetify, {
 });
 
 // Define localhost baseUrl
-// const baseUrl = "http://localhost:9000/";
+const baseUrl = "http://localhost:9000/";
 
 // Define VPN baseUrl
-const baseUrl = "http://192.168.30.183:8082/fitnessapp/"
+// const baseUrl = "http://192.168.30.183:8082/fitnessapp/"
 
 // Vue use service installers
 Vue.use(UserServiceInstaller, {
