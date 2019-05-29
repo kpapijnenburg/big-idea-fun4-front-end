@@ -43,31 +43,20 @@ export default {
       rules: {
         required: v => !!v || "Please enter a name for your workout."
       },
-      workouts: null,
+      workouts: [],
       dialog: false,
       workoutName: "",
       userId: null
     };
   },
   async mounted() {
-    this.userId = this.getUserId();
+    this.userId = this.$store.state.userId
 
     if (this.userId != null) {
       this.workouts = await this.$workOutService.getByUserId(this.userId);
     }
   },
   methods: {
-    getUserId() {
-      let value = "; " + document.cookie;
-      let parts = value.split("; " + "userId" + "=");
-
-      if (parts.length == 2) {
-        return parts
-          .pop()
-          .split(";")
-          .shift();
-      }
-    },
     addWorkout() {
       this.dialog = false;
 

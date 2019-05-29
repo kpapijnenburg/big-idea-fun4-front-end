@@ -110,7 +110,7 @@ export default {
     },
     addExercise() {
       this.workout.sets.push({
-        exercise: this.selectedExercise
+        exercise: {weight: 0, reps: 0, ...this.selectedExercise}
       });
       this.$workOutService.update(this.workout, this.workout.id);
       this.dialog = false;

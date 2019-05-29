@@ -89,10 +89,10 @@ export default {
   data() {
     return {
       set: {
-        id: -1,
-        weight: -1,
-        reps: -1,
-        exercise: Object
+        id: 0,
+        weight: 0,
+        reps: 0,
+        exercise: {}
       },
       succesful: false,
       failed: false
@@ -100,8 +100,8 @@ export default {
   },
   mounted() {
     this.set.id = this.setInfo.id;
-    this.set.reps = this.setInfo.reps;
-    this.set.weight = this.setInfo.weight;
+    this.set.reps = this.setInfo.reps || 0;
+    this.set.weight = this.setInfo.weight || 0;
     this.set.exercise = this.setInfo.exercise;
   }
 };
