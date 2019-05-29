@@ -17,9 +17,13 @@ Vue.use(Vuetify, {
   iconfont: "fa"
 });
 
-// Vue use service installers
-const baseUrl = "http://localhost:9000/";
+// Define localhost baseUrl
+// const baseUrl = "http://localhost:9000/";
 
+// Define VPN baseUrl
+const baseUrl = "http://192.168.30.183:8082/fitnessapp/"
+
+// Vue use service installers
 Vue.use(UserServiceInstaller, {
   baseUrl: baseUrl
 });
